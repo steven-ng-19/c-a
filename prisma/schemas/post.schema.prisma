@@ -1,0 +1,16 @@
+model Post {
+    id        String @id @default(uuid()) @db.VarChar(36)
+    userId    String @map("user_id") @db.VarChar(36)
+    productId String @map("product_id") @db.VarChar(36)
+
+    title   String @db.VarChar(255)
+    content String @db.Text
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    user    User    @relation(fields: [userId], references: [id])
+    product Product
+
+    @@map("posts")
+}
